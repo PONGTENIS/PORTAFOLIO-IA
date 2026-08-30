@@ -487,6 +487,25 @@
   .nota-notarial p:first-child{ margin-top: 0; }
   .nota-notarial strong{ color: var(--paper); font-weight: 700; }
 
+  .lineas-presupuesto{ margin-top: 26px; }
+  .linea-item{
+    display: flex;
+    gap: 16px;
+    padding: 15px 0;
+    border-top: 1px solid var(--line);
+  }
+  .linea-item:last-child{ border-bottom: 1px solid var(--line); }
+  .linea-num{
+    font-family: var(--mono);
+    font-size: 0.76rem;
+    font-weight: 600;
+    color: var(--gold);
+    flex-shrink: 0;
+    padding-top: 2px;
+  }
+  .linea-item p{ margin: 0; color: var(--soft); max-width: 54ch; }
+  .linea-cta{ margin-top: 30px; display: inline-block; }
+
   /* ============================================================
      FAQ
      ============================================================ */
@@ -777,11 +796,20 @@
   <section>
     <div class="col">
       <p class="eyebrow">Folio 04 — El presupuesto</p>
-      <h2 style="font-size: clamp(1.6rem, 3vw, 2.1rem); margin-top: 16px;">¿Y cuánto sale?</h2>
-      <div class="nota-notarial">
-        <p><strong>El número se habla en una reunión de 20 minutos</strong>, después de que veas la demo funcionando con un caso real. Nunca antes.</p>
-        <p>Así hablamos de eso con la herramienta ya adelante tuyo, no con una promesa en el aire.</p>
+      <h2 style="font-size: clamp(1.6rem, 3vw, 2.1rem); margin-top: 16px;">¿Cómo armo el presupuesto?</h2>
+
+      <div class="lineas-presupuesto">
+        <div class="linea-item"><span class="linea-num">01</span><p>El presupuesto se arma en base al tiempo real que me lleva dejarte la agenda funcionando, no con una tabla fija de precios.</p></div>
+        <div class="linea-item"><span class="linea-num">02</span><p>Depende de cuántas causas activas tenés, cuántas personas tienen que recibir el aviso, y qué tan a medida lo necesitás.</p></div>
+        <div class="linea-item"><span class="linea-num">03</span><p>Por eso no doy el número antes de la demo: sin ver cómo trabajás vos, cualquier cifra sería una adivinanza.</p></div>
+        <div class="linea-item"><span class="linea-num">04</span><p>Primero te muestro la herramienta funcionando, con un caso parecido al tuyo.</p></div>
+        <div class="linea-item"><span class="linea-num">05</span><p>Ahí entendés qué es exactamente lo que estás por contratar, no una promesa en el aire.</p></div>
+        <div class="linea-item"><span class="linea-num">06</span><p>Recién en una reunión de 20 minutos, con la demo ya vista, hablamos de la inversión concreta para tu estudio.</p></div>
+        <div class="linea-item"><span class="linea-num">07</span><p>Esa charla no te compromete a nada: es para que decidas con toda la información, no para presionarte.</p></div>
+        <div class="linea-item"><span class="linea-num">08</span><p>Si te cierra, agendamos y en dos semanas ya estás usando tu propia agenda.</p></div>
       </div>
+
+      <a class="cta-primary linea-cta" href="https://wa.me/5493515526397?text=Hola%20Ale%2C%20vi%20la%20demo%20y%20quiero%20agendar%20la%20reuni%C3%B3n%20de%2020%20minutos" target="_blank" rel="noopener">Agendá la reunión de 20 minutos</a>
     </div>
   </section>
 
