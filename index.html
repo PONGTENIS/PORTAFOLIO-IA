@@ -335,6 +335,122 @@
   .burbuja + .burbuja{ margin-top: 8px; margin-left: 20px; }
 
   /* ============================================================
+     DEMO INTERACTIVA — simulador de recordatorios
+     ============================================================ */
+  .demo-frase{
+    margin: 28px 0 0;
+    font-size: 1.02rem;
+    color: var(--soft);
+    max-width: 52ch;
+  }
+  .demo-frase-marca{
+    font-family: var(--mono);
+    font-size: 0.72rem;
+    font-weight: 600;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--soft);
+    opacity: 0.85;
+  }
+  .demo-despues-frase .demo-frase-marca{ color: var(--gold-br); opacity: 1; }
+  .demo-despues-frase{ color: var(--paper); }
+
+  .demo-widget{
+    margin-top: 20px;
+    background: var(--bg-3);
+    border: 1px solid var(--line);
+    border-radius: 16px;
+    padding: 24px;
+  }
+  .demo-controles{
+    display: grid;
+    grid-template-columns: minmax(0,1fr) minmax(0,1fr) auto;
+    gap: 14px;
+    align-items: end;
+  }
+  .demo-campo{
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    min-width: 0;
+    font-family: var(--mono);
+    font-size: 0.7rem;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--soft);
+  }
+  .demo-campo select{
+    width: 100%;
+    min-width: 0;
+    max-width: 100%;
+    font-family: var(--body);
+    font-size: 0.92rem;
+    text-transform: none;
+    letter-spacing: normal;
+    color: var(--paper);
+    background: var(--bg-deep);
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 10px 12px;
+    text-overflow: ellipsis;
+  }
+  .demo-campo select:focus-visible{ outline: 2px solid var(--gold); outline-offset: 2px; }
+  .demo-widget button.cta-primary{
+    border: none;
+    cursor: pointer;
+    font-size: 0.78rem;
+    padding: 12px 20px;
+  }
+  .demo-widget button.cta-primary:disabled{ opacity: 0.55; cursor: default; filter: none; transform: none; }
+
+  .demo-chat{
+    margin-top: 22px;
+    min-height: 96px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .demo-vacio{
+    margin: 0;
+    color: var(--soft);
+    opacity: 0.7;
+    font-size: 0.9rem;
+  }
+  .burbuja-demo{ max-width: 42ch; animation: aparecer-burbuja 0.25s ease-out; }
+  @keyframes aparecer-burbuja{
+    from{ opacity: 0; transform: translateY(4px); }
+    to{ opacity: 1; transform: translateY(0); }
+  }
+  .demo-escribiendo{
+    display: inline-flex;
+    gap: 4px;
+    background: var(--bg-deep);
+    border: 1px solid var(--line);
+    border-radius: 4px 14px 14px 14px;
+    padding: 12px 14px;
+    width: fit-content;
+  }
+  .demo-escribiendo span{
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--soft);
+    opacity: 0.6;
+    animation: rebotar-punto 1s ease-in-out infinite;
+  }
+  .demo-escribiendo span:nth-child(2){ animation-delay: 0.15s; }
+  .demo-escribiendo span:nth-child(3){ animation-delay: 0.3s; }
+  @keyframes rebotar-punto{
+    0%, 100%{ transform: translateY(0); opacity: 0.5; }
+    50%{ transform: translateY(-4px); opacity: 1; }
+  }
+
+  .demo-cta-final{ margin-top: 26px; display: inline-block; }
+
+  @media (max-width: 640px){
+    .demo-controles{ grid-template-columns: 1fr; }
+  }
+
+  /* ============================================================
      CÓMO TRABAJO
      ============================================================ */
   .pasos{ margin-top: 32px; position: relative; }
@@ -485,33 +601,137 @@
   <section id="demo">
     <div class="col">
       <p class="eyebrow">Folio 02 — La demo</p>
-      <h2 style="font-size: clamp(1.6rem, 3vw, 2.1rem); margin-top: 16px;">Mirá cómo cambia tu semana</h2>
-      <div class="demo">
-        <div class="panel antes">
-          <p class="marca">Antes</p>
-          <div class="notas">
-            <div class="nota"></div>
-            <div class="nota"></div>
-            <div class="nota"></div>
-            <div class="nota"></div>
-          </div>
-          <p>Planillas sueltas, post-its, el miedo de olvidarte una audiencia.</p>
+      <h2 style="font-size: clamp(1.6rem, 3vw, 2.1rem); margin-top: 16px;">Probá cómo se avisa una fecha</h2>
+
+      <p class="demo-frase demo-antes-frase"><span class="demo-frase-marca">Antes —</span><br>La fecha vivía en un post-it, y todo dependía de que alguien se acordara de mirarlo.</p>
+
+      <div class="demo-widget">
+        <div class="demo-controles">
+          <label class="demo-campo">
+            <span>Elegí una causa</span>
+            <select id="demo-causa"></select>
+          </label>
+          <label class="demo-campo">
+            <span>Avisar con</span>
+            <select id="demo-anticipacion">
+              <option value="1">1 día antes</option>
+              <option value="2" selected>2 días antes</option>
+              <option value="3">3 días antes</option>
+            </select>
+          </label>
+          <button id="demo-generar" class="cta-primary" type="button">Simular recordatorio</button>
         </div>
-        <div class="panel despues">
-          <p class="marca">Después</p>
-          <div class="burbuja">
-            <span class="quien">Recordatorio automático</span>
-            Mañana 10:00 — Audiencia causa Pérez c/ Rossi, Juzgado Civil N.º 4.
-          </div>
-          <div class="burbuja">
-            <span class="quien">Al cliente</span>
-            Le avisamos también a tu cliente, con los días de anticipación que elijas.
-          </div>
-          <p>Un aviso automático que te llega a vos y a tu cliente, con los días de anticipación que vos elijas.</p>
+        <div class="demo-chat" id="demo-chat">
+          <p class="demo-vacio" id="demo-vacio">Elegí una causa y tocá «Simular recordatorio» para ver el aviso.</p>
         </div>
       </div>
+
+      <p class="demo-frase demo-despues-frase"><span class="demo-frase-marca">Después —</span><br>El aviso sale solo, con los días de anticipación que vos elijas, sin que nadie tenga que acordarse.</p>
+
+      <a class="cta-primary demo-cta-final" href="https://wa.me/5493515526397?text=Hola%20Ale%2C%20vi%20la%20demo%20de%20la%20agenda%20con%20recordatorios%20y%20quiero%20agendar%2020%20minutos%20para%20ver%20mi%20caso" target="_blank" rel="noopener">¿Lo ves claro? Agendá 20 minutos y te armo la versión para tu negocio</a>
     </div>
   </section>
+
+  <script>
+  (function(){
+    var CAUSAS = [
+      { nombre: "Pérez c/ Rossi", tipo: "Audiencia de conciliación", lugar: "Juzgado Civil N.º 4", offset: 5 },
+      { nombre: "Gómez c/ Municipalidad de Córdoba", tipo: "Vencimiento de contestación de demanda", lugar: "Juzgado Contencioso Administrativo N.º 2", offset: 8 },
+      { nombre: "Fernández s/ Sucesión", tipo: "Presentación de inventario", lugar: "Juzgado de Familia N.º 1", offset: 3 },
+      { nombre: "López c/ Seguros del Sur", tipo: "Audiencia testimonial", lugar: "Juzgado Civil y Comercial N.º 7", offset: 12 }
+    ];
+
+    var selectCausa = document.getElementById('demo-causa');
+    var selectAnticipacion = document.getElementById('demo-anticipacion');
+    var botonGenerar = document.getElementById('demo-generar');
+    var chat = document.getElementById('demo-chat');
+    var vacio = document.getElementById('demo-vacio');
+
+    if (!selectCausa || !botonGenerar) return;
+
+    CAUSAS.forEach(function(causa, indice){
+      var opcion = document.createElement('option');
+      opcion.value = String(indice);
+      opcion.textContent = causa.nombre;
+      selectCausa.appendChild(opcion);
+    });
+
+    function formatearFecha(fecha){
+      var texto = fecha.toLocaleDateString('es-AR', { weekday: 'long', day: 'numeric', month: 'long' });
+      return texto.charAt(0).toUpperCase() + texto.slice(1);
+    }
+
+    function crearBurbuja(quien, texto){
+      var div = document.createElement('div');
+      div.className = 'burbuja burbuja-demo';
+      var etiqueta = document.createElement('span');
+      etiqueta.className = 'quien';
+      etiqueta.textContent = quien;
+      div.appendChild(etiqueta);
+      div.appendChild(document.createTextNode(texto));
+      return div;
+    }
+
+    function crearEscribiendo(){
+      var div = document.createElement('div');
+      div.className = 'demo-escribiendo';
+      div.setAttribute('aria-hidden', 'true');
+      div.innerHTML = '<span></span><span></span><span></span>';
+      return div;
+    }
+
+    var animando = false;
+    var reducirMovimiento = !!(window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+
+    function simular(){
+      if (animando) return;
+      animando = true;
+      botonGenerar.disabled = true;
+
+      var causa = CAUSAS[Number(selectCausa.value) || 0];
+      var anticipacion = Number(selectAnticipacion.value) || 2;
+
+      var hoy = new Date();
+      var fechaEvento = new Date(hoy.getFullYear(), hoy.getMonth(), hoy.getDate() + causa.offset);
+      var fechaTexto = formatearFecha(fechaEvento);
+
+      var mensajeEstudio = '🔔 Recordatorio automático — ' + causa.tipo + ' de la causa ' + causa.nombre + ', ' + causa.lugar + '. ' + fechaTexto + '. Faltan ' + causa.offset + ' días.';
+      var mensajeCliente = 'Hola, te escribimos para recordarte que el ' + fechaTexto + ' tenés ' + causa.tipo.toLowerCase() + ' en tu causa. Este aviso te llega con ' + anticipacion + ' día' + (anticipacion === 1 ? '' : 's') + ' de anticipación. Cualquier consulta, escribinos por acá.';
+
+      chat.innerHTML = '';
+
+      var pasos = [
+        { quien: 'Para vos (el estudio)', texto: mensajeEstudio },
+        { quien: 'Para tu cliente', texto: mensajeCliente }
+      ];
+
+      var demora = reducirMovimiento ? 0 : 650;
+      var espera = reducirMovimiento ? 0 : 550;
+      var acumulado = 150;
+
+      pasos.forEach(function(paso, indice){
+        var esperaEscribiendo = acumulado;
+        acumulado += demora + espera;
+        var esUltimo = indice === pasos.length - 1;
+
+        setTimeout(function(){
+          var escribiendo = crearEscribiendo();
+          chat.appendChild(escribiendo);
+          setTimeout(function(){
+            if (escribiendo.parentNode) chat.removeChild(escribiendo);
+            chat.appendChild(crearBurbuja(paso.quien, paso.texto));
+            if (esUltimo){
+              animando = false;
+              botonGenerar.disabled = false;
+            }
+          }, demora);
+        }, esperaEscribiendo);
+      });
+    }
+
+    botonGenerar.addEventListener('click', simular);
+  })();
+  </script>
 
   <!-- CÓMO TRABAJO ------------------------------------------------ -->
   <section class="tone-2">
