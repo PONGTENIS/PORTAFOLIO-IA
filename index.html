@@ -253,8 +253,32 @@
   }
   .veredicto .si .marca{ color: var(--gold-br); }
   .veredicto .no .marca{ color: var(--soft); opacity: 0.8; }
-  .veredicto p{ margin: 12px 0 0; color: var(--soft); font-size: 0.98rem; }
   .veredicto .no{ opacity: 0.72; }
+  .veredicto ul{
+    list-style: none;
+    margin: 14px 0 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .veredicto li{
+    color: var(--soft);
+    font-size: 0.96rem;
+    line-height: 1.5;
+    padding-left: 20px;
+    position: relative;
+  }
+  .veredicto li::before{
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 8px;
+    height: 1px;
+  }
+  .veredicto .si li::before{ background: var(--gold); }
+  .veredicto .no li::before{ background: var(--soft); opacity: 0.6; }
 
   /* ============================================================
      DEMO ANTES / DESPUÉS
@@ -417,9 +441,9 @@
     <div class="col">
       <div>
         <p class="eyebrow">Comunicación Inteligente</p>
-        <h1>Que ninguna fecha se les escape.</h1>
-        <p>Armo agendas con recordatorios automáticos para estudios jurídicos.</p>
-        <p>Vos seguís llevando tus causas como siempre, pero con un aviso que nunca se olvida.</p>
+        <h1>Una agenda que avisa antes de que se te escape la fecha.</h1>
+        <p>Recordatorios automáticos por WhatsApp o mail, para vos y para tu cliente, en cada audiencia y vencimiento.</p>
+        <p>Vos seguís llevando tus causas como siempre. La diferencia es que ahora nadie se olvida de nada.</p>
         <div class="hero-links">
           <a class="cta-primary" href="#agendar">Agendar mi reunión de 20 minutos</a>
           <a class="cta-secondary" href="#demo">Ver la demo ↓</a>
@@ -439,11 +463,19 @@
       <div class="veredicto">
         <div class="si">
           <p class="marca">Sí, si sos así</p>
-          <p>Un estudio chico o mediano, o un abogado que trabaja solo, que maneja varias causas a la vez y ya tuvo un susto con una fecha.</p>
+          <ul>
+            <li>Manejás varias causas a la vez y ya no confiás solo en tu memoria.</li>
+            <li>Ya tuviste (o casi tuviste) un susto por una fecha que se te escapó.</li>
+            <li>Sos un estudio chico o mediano, o trabajás solo, sin área de sistemas.</li>
+          </ul>
         </div>
         <div class="no">
           <p class="marca">No, si sos así</p>
-          <p>Un estudio que ya tiene todo digitalizado y un sistema de gestión que le funciona bien.</p>
+          <ul>
+            <li>Ya tenés un sistema de gestión digital que te funciona bien.</li>
+            <li>Preferís seguir anotando todo a mano, sin cambiar nada por ahora.</li>
+            <li>Buscás un programa completo de gestión de causas, no solo recordatorios.</li>
+          </ul>
         </div>
       </div>
     </div>
